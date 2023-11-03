@@ -2,6 +2,14 @@ isNumericVector <- function(x) {
   is.numeric(x) && !anyNA(x) && length(x) >= 1L
 }
 
+isBoolean <- function(x) {
+  is.logical(x) && length(x) == 1L && !is.na(x)
+}
+
+isDouble <- function(x) {
+  is.numeric(x) && length(x) == 1L && !is.na(x)
+}
+
 checkxy <- function(x, y) {
   stopifnot(isNumericVector(x), isNumericVector(y))
   stopifnot(length(x) == length(y))

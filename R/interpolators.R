@@ -25,20 +25,60 @@ iprBarycentricRational <- function(x, y, ao = 3) {
   ipr
 }
 
-#' Title
+#' @title Catmull-Rom interpolator
+#' @description Catmull-Rom interpolator for 2-dimensional or 3-dimensional
+#'   points.
 #'
-#' @param points matrix of points, one point per row
-#' @param closed Boolean
-#' @param alpha parameter between 0 and 1
+#' @param points numeric matrix of 2D or 3D points, one point per row
+#' @param closed Boolean, whether the curve is closed
+#' @param alpha parameter between 0 and 1; the default value 0.5 is recommended
 #'
-#' @return x
+#' @return An interpolator, for usage in \code{\link{evalInterpolator}}.
 #' @export
 #'
+#' @details See \href{https://www.boost.org/doc/libs/1_83_0/libs/math/doc/html/math_toolkit/catmull_rom.html}{Catmull-Rom splines}.
+#'
 #' @examples
-#' #
+#' library(interpolators)
+#' points <- rbind(
+#'   c(0, 2.5),
+#'   c(2, 4),
+#'   c(3, 2),
+#'   c(4, 1.5),
+#'   c(5, 6),
+#'   c(6, 5),
+#'   c(7, 3),
+#'   c(9, 1),
+#'   c(10, 2.5),
+#'   c(11, 7),
+#'   c(9, 5),
+#'   c(8, 6),
+#'   c(7, 5.5)
+#' )
+#' ipr <- iprCatmullRom(points)
+#' s <- seq(0, 1, length.out = 400)
+#' Curve <- evalInterpolator(ipr, s)
+#' head(Curve)
+#' plot(Curve, type = "l", lwd = 2)
+#' points(points, pch = 19)
 iprCatmullRom <- function(points, closed = FALSE, alpha = 0.5) {
-  ipr <- ipr_catmullRom(points, closed, alpha)
-  attr(ipr, "ipr") <- "CatmullRom"
+  stopifnot(is.matrix(points))
+  stopifnot(ncol(points) %in% c(2L, 3L))
+  storage.mode(points) <- "double"
+  if(anyNA(points)) {
+    stop("There are missing values in the `points` matrix.")
+  }
+  stopifnot(isBoolean(closed))
+  stopifnot(isDouble(alpha))
+  stopifnot(alpha >=0, alpha <= 1)
+  d <- ncol(points)
+  if(d == 2L) {
+    ipr <- ipr_catmullRom2(points, closed, as.double(alpha))
+    attr(ipr, "ipr") <- "CatmullRom2"
+  } else {
+    ipr <- ipr_catmullRom3(points, closed, as.double(alpha))
+    attr(ipr, "ipr") <- "CatmullRom3"
+  }
   ipr
 }
 
@@ -105,9 +145,11 @@ iprPCHIP <- function(x, y) {
 #'
 #' @param ipr an interpolator
 #' @param x numeric vector giving the values to be interpolated; missing
-#'   values are not allowed
+#'   values are not allowed; for Catmull-Rom splines, the values must be
+#'   between 0 and 1
 #'
-#' @return Numeric vector of interpolated values.
+#' @return Numeric vector of interpolated values or numeric matrix of
+#'   interpolated points for the Catmull-Rom interpolator.
 #' @export
 evalInterpolator <- function(ipr, x, derivative = 0) {
   stopifnot(isNumericVector(x))
@@ -115,10 +157,14 @@ evalInterpolator <- function(ipr, x, derivative = 0) {
   if(whichipr == "barycentricRational") {
     stopifnot(derivative %in% c(0, 1))
     eval_barycentricRational(ipr, as.double(x), as.integer(derivative))
-  } else if(whichipr == "CatmullRom") {
+  } else if(whichipr == "CatmullRom2") {
     stopifnot(derivative %in% c(0, 1))
     stopifnot(all(x >= 0), all(x <= 1))
-    eval_catmullRom(ipr, as.double(x), as.integer(derivative))
+    eval_catmullRom2(ipr, as.double(x), as.integer(derivative))
+  } else if(whichipr == "CatmullRom3") {
+    stopifnot(derivative %in% c(0, 1))
+    stopifnot(all(x >= 0), all(x <= 1))
+    eval_catmullRom3(ipr, as.double(x), as.integer(derivative))
   } else if(whichipr == "makima") {
     stopifnot(derivative %in% c(0, 1))
     eval_makima(ipr, as.double(x), as.integer(derivative))

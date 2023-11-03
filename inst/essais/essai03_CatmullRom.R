@@ -1,5 +1,4 @@
 library(interpolators)
-
 points <- rbind(
   c(0, 2.5),
   c(2, 4),
@@ -15,10 +14,9 @@ points <- rbind(
   c(8, 6),
   c(7, 5.5)
 )
-
 ipr <- iprCatmullRom(points)
-s <- seq(0, 1, length.out = 100)
-interPoints <- evalInterpolator(ipr, s)
-head(interPoints)
-plot(interPoints, type = "l")
+s <- seq(0, 1, length.out = 400)
+Curve <- evalInterpolator(ipr, s)
+head(Curve)
+plot(Curve, type = "l", lwd = 2)
 points(points, pch = 19)

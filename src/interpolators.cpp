@@ -34,50 +34,79 @@ Rcpp::NumericVector eval_barycentricRational(
 }
 
 // [[Rcpp::export]]
-Rcpp::XPtr<ipr_catmull_rom> ipr_catmullRom(
+Rcpp::XPtr<ipr_catmull_rom2> ipr_catmullRom2(
     Rcpp::NumericMatrix X, bool closed, double alpha
 ) {
   const int nrow = X.nrow();
-  const int dim = X.ncol();
   std::vector<std::array<double, 2>> points(nrow);
   for(int i = 0; i < nrow; i++) {
-    std::array<double, 2> pti;
-    for(int j = 0; j < dim; j++) {
-      pti[j] = X(i, j);
-    }
+    std::array<double, 2> pti = {X(i, 0), X(i, 1)};
     points[i] = pti;
   }
-  ipr_catmull_rom* ipr_ptr =
-    new ipr_catmull_rom(std::move(points), closed, alpha);
-  Rcpp::XPtr<ipr_catmull_rom> ipr_xptr(ipr_ptr, false);
+  ipr_catmull_rom2* ipr_ptr =
+    new ipr_catmull_rom2(std::move(points), closed, alpha);
+  Rcpp::XPtr<ipr_catmull_rom2> ipr_xptr(ipr_ptr, false);
   return ipr_xptr;
 }
 
 // [[Rcpp::export]]
-Rcpp::NumericMatrix eval_catmullRom(
-    Rcpp::XPtr<ipr_catmull_rom> ipr_xptr,
-    Rcpp::NumericVector s,
-    int derivative
+Rcpp::NumericMatrix eval_catmullRom2(
+    Rcpp::XPtr<ipr_catmull_rom2> ipr_xptr, Rcpp::NumericVector s, int derivative
 ) {
-  ipr_catmull_rom ipr = *(ipr_xptr.get());
+  ipr_catmull_rom2 ipr = *(ipr_xptr.get());
   const int n = s.size();
-  //std::vector<double> ipr0 = ipr(0.0);
-  const int dim = 2;
-  Rcpp::Rcout << dim << "\n";
   const double max_s = ipr.max_parameter();
-  Rcpp::Rcout << max_s << "\n";
-  Rcpp::NumericMatrix Y(n, dim);
+  Rcpp::NumericMatrix Y(n, 2);
   if(derivative == 0) {
     for(int i = 0; i < n; i++) {
       std::array<double, 2> yi = ipr(s(i) * max_s);
-      Rcpp::Rcout << yi[0] << "\n";
       Rcpp::NumericVector Yi = Rcpp::NumericVector::create(yi[0], yi[1]);
       Y(i, Rcpp::_) = Yi;
     }
   } else {
     for(int i = 0; i < n; i++) {
       std::array<double, 2> yi = ipr.prime(s(i) * max_s);
-      Rcpp::NumericVector Yi(yi.begin(), yi.end());
+      Rcpp::NumericVector Yi = Rcpp::NumericVector::create(yi[0], yi[1]);
+      Y(i, Rcpp::_) = Yi;
+    }
+  }
+  return Y;
+}
+
+// [[Rcpp::export]]
+Rcpp::XPtr<ipr_catmull_rom3> ipr_catmullRom3(
+    Rcpp::NumericMatrix X, bool closed, double alpha
+) {
+  const int nrow = X.nrow();
+  std::vector<std::array<double, 3>> points(nrow);
+  for(int i = 0; i < nrow; i++) {
+    std::array<double, 3> pti = {X(i, 0), X(i, 1), X(i, 2)};
+    points[i] = pti;
+  }
+  ipr_catmull_rom3* ipr_ptr =
+    new ipr_catmull_rom3(std::move(points), closed, alpha);
+  Rcpp::XPtr<ipr_catmull_rom3> ipr_xptr(ipr_ptr, false);
+  return ipr_xptr;
+}
+
+// [[Rcpp::export]]
+Rcpp::NumericMatrix eval_catmullRom3(
+    Rcpp::XPtr<ipr_catmull_rom3> ipr_xptr, Rcpp::NumericVector s, int derivative
+) {
+  ipr_catmull_rom3 ipr = *(ipr_xptr.get());
+  const int n = s.size();
+  const double max_s = ipr.max_parameter();
+  Rcpp::NumericMatrix Y(n, 3);
+  if(derivative == 0) {
+    for(int i = 0; i < n; i++) {
+      std::array<double, 3> yi = ipr(s(i) * max_s);
+      Rcpp::NumericVector Yi = Rcpp::NumericVector::create(yi[0], yi[1], yi[2]);
+      Y(i, Rcpp::_) = Yi;
+    }
+  } else {
+    for(int i = 0; i < n; i++) {
+      std::array<double, 3> yi = ipr.prime(s(i) * max_s);
+      Rcpp::NumericVector Yi = Rcpp::NumericVector::create(yi[0], yi[1], yi[2]);
       Y(i, Rcpp::_) = Yi;
     }
   }
