@@ -5,7 +5,7 @@ ipr_barycentricRational <- function(x, y, order) {
     .Call(`_interpolators_ipr_barycentricRational`, x, y, order)
 }
 
-eval_barycentricRational <- function(ipr_xptr, x) {
-    .Call(`_interpolators_eval_barycentricRational`, ipr_xptr, x)
+eval_barycentricRational <- function(ipr_xptr, x, derivative) {
+    .Call(`_interpolators_eval_barycentricRational`, ipr_xptr, x, derivative)
 }
 

@@ -25,21 +25,22 @@ BEGIN_RCPP
 END_RCPP
 }
 // eval_barycentricRational
-Rcpp::NumericVector eval_barycentricRational(Rcpp::XPtr<ipr_barycentric_rational> ipr_xptr, Rcpp::NumericVector x);
-RcppExport SEXP _interpolators_eval_barycentricRational(SEXP ipr_xptrSEXP, SEXP xSEXP) {
+Rcpp::NumericVector eval_barycentricRational(Rcpp::XPtr<ipr_barycentric_rational> ipr_xptr, Rcpp::NumericVector x, int derivative);
+RcppExport SEXP _interpolators_eval_barycentricRational(SEXP ipr_xptrSEXP, SEXP xSEXP, SEXP derivativeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::XPtr<ipr_barycentric_rational> >::type ipr_xptr(ipr_xptrSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(eval_barycentricRational(ipr_xptr, x));
+    Rcpp::traits::input_parameter< int >::type derivative(derivativeSEXP);
+    rcpp_result_gen = Rcpp::wrap(eval_barycentricRational(ipr_xptr, x, derivative));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
     {"_interpolators_ipr_barycentricRational", (DL_FUNC) &_interpolators_ipr_barycentricRational, 3},
-    {"_interpolators_eval_barycentricRational", (DL_FUNC) &_interpolators_eval_barycentricRational, 2},
+    {"_interpolators_eval_barycentricRational", (DL_FUNC) &_interpolators_eval_barycentricRational, 3},
     {NULL, NULL, 0}
 };
 

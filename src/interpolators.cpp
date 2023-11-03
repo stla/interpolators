@@ -14,13 +14,21 @@ Rcpp::XPtr<ipr_barycentric_rational> ipr_barycentricRational(
 
 // [[Rcpp::export]]
 Rcpp::NumericVector eval_barycentricRational(
-    Rcpp::XPtr<ipr_barycentric_rational> ipr_xptr, Rcpp::NumericVector x
+    Rcpp::XPtr<ipr_barycentric_rational> ipr_xptr,
+    Rcpp::NumericVector x,
+    int derivative
 ) {
   ipr_barycentric_rational ipr = *(ipr_xptr.get());
   int n = x.size();
   Rcpp::NumericVector y(n);
-  for(int i = 0; i < n; i++) {
-    y(i) = ipr(x(i));
+  if(derivative == 0) {
+    for(int i = 0; i < n; i++) {
+      y(i) = ipr(x(i));
+    }
+  } else {
+    for(int i = 0; i < n; i++) {
+      y(i) = ipr.prime(x(i));
+    }
   }
   return y;
 }
