@@ -19,7 +19,7 @@ An interpolator, for usage in \code{\link{evalInterpolator}}.
 Barycentric rational interpolator.
 }
 \details{
-See \href{https://www.boost.org/doc/libs/1_83_0/libs/math/doc/html/math_toolkit/barycentric.html}{Barycentric Rational Interpolation}.
+See \href{https://www.boost.org/doc/libs/1_83_0/libs/math/doc/html/math_toolkit/barycentric.html}{Barycentric rational interpolation}.
 }
 \examples{
 library(interpolators)

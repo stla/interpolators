@@ -34,6 +34,36 @@ Rcpp::NumericVector eval_barycentricRational(
 }
 
 // [[Rcpp::export]]
+Rcpp::XPtr<ipr_makima> ipr_Makima(
+    Rcpp::NumericVector x, Rcpp::NumericVector y
+) {
+  std::vector<double> u(x.begin(), x.end());
+  std::vector<double> v(y.begin(), y.end());
+  ipr_makima* ipr_ptr = new ipr_makima(std::move(u), std::move(v));
+  Rcpp::XPtr<ipr_makima> ipr_xptr(ipr_ptr, false);
+  return ipr_xptr;
+}
+
+// [[Rcpp::export]]
+Rcpp::NumericVector eval_makima(
+    Rcpp::XPtr<ipr_makima> ipr_xptr, Rcpp::NumericVector x, int derivative
+) {
+  ipr_makima ipr = *(ipr_xptr.get());
+  int n = x.size();
+  Rcpp::NumericVector y(n);
+  if(derivative == 0) {
+    for(int i = 0; i < n; i++) {
+      y(i) = ipr(x(i));
+    }
+  } else {
+    for(int i = 0; i < n; i++) {
+      y(i) = ipr.prime(x(i));
+    }
+  }
+  return y;
+}
+
+// [[Rcpp::export]]
 Rcpp::XPtr<ipr_pchip> ipr_PCHIP(
     Rcpp::NumericVector x, Rcpp::NumericVector y
 ) {

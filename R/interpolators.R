@@ -8,7 +8,7 @@
 #' @return An interpolator, for usage in \code{\link{evalInterpolator}}.
 #' @export
 #'
-#' @details See \href{https://www.boost.org/doc/libs/1_83_0/libs/math/doc/html/math_toolkit/barycentric.html}{Barycentric Rational Interpolation}.
+#' @details See \href{https://www.boost.org/doc/libs/1_83_0/libs/math/doc/html/math_toolkit/barycentric.html}{Barycentric rational interpolation}.
 #'
 #' @examples
 #' library(interpolators)
@@ -22,6 +22,35 @@ iprBarycentricRational <- function(x, y, ao = 3) {
   xy <- checkxy(x, y)
   ipr <- ipr_barycentricRational(xy[["x"]], xy[["y"]], as.integer(ao))
   attr(ipr, "ipr") <- "barycentricRational"
+  ipr
+}
+
+#' @title Modified Akima interpolator
+#' @description Modified Akima interpolator.
+#'
+#' @param x,y numeric vectors giving the coordinates of the known points,
+#'   without missing value
+#'
+#' @return An interpolator, for usage in \code{\link{evalInterpolator}}.
+#' @export
+#'
+#' @details See \href{https://www.boost.org/doc/libs/1_83_0/libs/math/doc/html/math_toolkit/makima.html}{Modified Akima interpolation}.
+#'
+#' @examples
+#' library(interpolators)
+#' x <- seq(0, 4*pi, length.out = 9L)
+#' y <- x - sin(x)
+#' ipr <- iprMakima(x, y)
+#' curve(x - sin(x), from = 0, to = 4*pi, lwd = 2)
+#' curve(
+#'   evalInterpolator(ipr, x),
+#'   add = TRUE, col = "blue", lwd = 2, lty = "dashed"
+#' )
+#' points(x, y, pch = 19)
+iprMakima <- function(x, y) {
+  xy <- checkxy(x, y)
+  ipr <- ipr_Makima(xy[["x"]], xy[["y"]])
+  attr(ipr, "ipr") <- "makima"
   ipr
 }
 
@@ -69,6 +98,9 @@ evalInterpolator <- function(ipr, x, derivative = 0) {
   if(whichipr == "barycentricRational") {
     stopifnot(derivative %in% c(0, 1))
     eval_barycentricRational(ipr, as.double(x), as.integer(derivative))
+  } else if(whichipr == "makima") {
+    stopifnot(derivative %in% c(0, 1))
+    eval_makima(ipr, as.double(x), as.integer(derivative))
   } else if(whichipr == "PCHIP") {
     stopifnot(derivative %in% c(0, 1))
     eval_PCHIP(ipr, as.double(x), as.integer(derivative))

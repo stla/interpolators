@@ -2,6 +2,7 @@
 
 export(evalInterpolator)
 export(iprBarycentricRational)
+export(iprMakima)
 export(iprPCHIP)
 importFrom(Rcpp,evalCpp)
 useDynLib(interpolators, .registration=TRUE)
