@@ -15,7 +15,7 @@ points[c(2, 4, 6, 8, 10),] <- vs2
 
 
 
-ipr <- iprCatmullRom(points, closed = TRUE)
+ipr <- iprCatmullRom(points, closed = TRUE, alpha = 1)
 s <- seq(0, 1, length.out = 400)
 Curve <- evalInterpolator(ipr, s)
 head(Curve)

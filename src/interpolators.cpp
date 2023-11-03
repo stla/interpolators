@@ -19,7 +19,7 @@ Rcpp::NumericVector eval_barycentricRational(
     int derivative
 ) {
   ipr_barycentric_rational ipr = *(ipr_xptr.get());
-  int n = x.size();
+  const int n = x.size();
   Rcpp::NumericVector y(n);
   if(derivative == 0) {
     for(int i = 0; i < n; i++) {
@@ -129,7 +129,7 @@ Rcpp::NumericVector eval_makima(
     Rcpp::XPtr<ipr_makima> ipr_xptr, Rcpp::NumericVector x, int derivative
 ) {
   ipr_makima ipr = *(ipr_xptr.get());
-  int n = x.size();
+  const int n = x.size();
   Rcpp::NumericVector y(n);
   if(derivative == 0) {
     for(int i = 0; i < n; i++) {
@@ -159,7 +159,7 @@ Rcpp::NumericVector eval_PCHIP(
     Rcpp::XPtr<ipr_pchip> ipr_xptr, Rcpp::NumericVector x, int derivative
 ) {
   ipr_pchip ipr = *(ipr_xptr.get());
-  int n = x.size();
+  const int n = x.size();
   Rcpp::NumericVector y(n);
   if(derivative == 0) {
     for(int i = 0; i < n; i++) {
