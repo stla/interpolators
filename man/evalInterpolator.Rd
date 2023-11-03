@@ -10,10 +10,12 @@ evalInterpolator(ipr, x, derivative = 0)
 \item{ipr}{an interpolator}
 
 \item{x}{numeric vector giving the values to be interpolated; missing
-values are not allowed}
+values are not allowed; for Catmull-Rom splines, the values must be
+between 0 and 1}
 }
 \value{
-Numeric vector of interpolated values.
+Numeric vector of interpolated values or numeric matrix of
+  interpolated points for the Catmull-Rom interpolator.
 }
 \description{
 Evaluation of an interpolator at some given values.

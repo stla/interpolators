@@ -37,29 +37,55 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// ipr_catmullRom
-Rcpp::XPtr<ipr_catmull_rom> ipr_catmullRom(Rcpp::NumericMatrix X, bool closed, double alpha);
-RcppExport SEXP _interpolators_ipr_catmullRom(SEXP XSEXP, SEXP closedSEXP, SEXP alphaSEXP) {
+// ipr_catmullRom2
+Rcpp::XPtr<ipr_catmull_rom2> ipr_catmullRom2(Rcpp::NumericMatrix X, bool closed, double alpha);
+RcppExport SEXP _interpolators_ipr_catmullRom2(SEXP XSEXP, SEXP closedSEXP, SEXP alphaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type X(XSEXP);
     Rcpp::traits::input_parameter< bool >::type closed(closedSEXP);
     Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    rcpp_result_gen = Rcpp::wrap(ipr_catmullRom(X, closed, alpha));
+    rcpp_result_gen = Rcpp::wrap(ipr_catmullRom2(X, closed, alpha));
     return rcpp_result_gen;
 END_RCPP
 }
-// eval_catmullRom
-Rcpp::NumericMatrix eval_catmullRom(Rcpp::XPtr<ipr_catmull_rom> ipr_xptr, Rcpp::NumericVector s, int derivative);
-RcppExport SEXP _interpolators_eval_catmullRom(SEXP ipr_xptrSEXP, SEXP sSEXP, SEXP derivativeSEXP) {
+// eval_catmullRom2
+Rcpp::NumericMatrix eval_catmullRom2(Rcpp::XPtr<ipr_catmull_rom2> ipr_xptr, Rcpp::NumericVector s, int derivative);
+RcppExport SEXP _interpolators_eval_catmullRom2(SEXP ipr_xptrSEXP, SEXP sSEXP, SEXP derivativeSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::XPtr<ipr_catmull_rom> >::type ipr_xptr(ipr_xptrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::XPtr<ipr_catmull_rom2> >::type ipr_xptr(ipr_xptrSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type s(sSEXP);
     Rcpp::traits::input_parameter< int >::type derivative(derivativeSEXP);
-    rcpp_result_gen = Rcpp::wrap(eval_catmullRom(ipr_xptr, s, derivative));
+    rcpp_result_gen = Rcpp::wrap(eval_catmullRom2(ipr_xptr, s, derivative));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ipr_catmullRom3
+Rcpp::XPtr<ipr_catmull_rom3> ipr_catmullRom3(Rcpp::NumericMatrix X, bool closed, double alpha);
+RcppExport SEXP _interpolators_ipr_catmullRom3(SEXP XSEXP, SEXP closedSEXP, SEXP alphaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< bool >::type closed(closedSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(ipr_catmullRom3(X, closed, alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
+// eval_catmullRom3
+Rcpp::NumericMatrix eval_catmullRom3(Rcpp::XPtr<ipr_catmull_rom3> ipr_xptr, Rcpp::NumericVector s, int derivative);
+RcppExport SEXP _interpolators_eval_catmullRom3(SEXP ipr_xptrSEXP, SEXP sSEXP, SEXP derivativeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<ipr_catmull_rom3> >::type ipr_xptr(ipr_xptrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type s(sSEXP);
+    Rcpp::traits::input_parameter< int >::type derivative(derivativeSEXP);
+    rcpp_result_gen = Rcpp::wrap(eval_catmullRom3(ipr_xptr, s, derivative));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -117,8 +143,10 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_interpolators_ipr_barycentricRational", (DL_FUNC) &_interpolators_ipr_barycentricRational, 3},
     {"_interpolators_eval_barycentricRational", (DL_FUNC) &_interpolators_eval_barycentricRational, 3},
-    {"_interpolators_ipr_catmullRom", (DL_FUNC) &_interpolators_ipr_catmullRom, 3},
-    {"_interpolators_eval_catmullRom", (DL_FUNC) &_interpolators_eval_catmullRom, 3},
+    {"_interpolators_ipr_catmullRom2", (DL_FUNC) &_interpolators_ipr_catmullRom2, 3},
+    {"_interpolators_eval_catmullRom2", (DL_FUNC) &_interpolators_eval_catmullRom2, 3},
+    {"_interpolators_ipr_catmullRom3", (DL_FUNC) &_interpolators_ipr_catmullRom3, 3},
+    {"_interpolators_eval_catmullRom3", (DL_FUNC) &_interpolators_eval_catmullRom3, 3},
     {"_interpolators_ipr_Makima", (DL_FUNC) &_interpolators_ipr_Makima, 2},
     {"_interpolators_eval_makima", (DL_FUNC) &_interpolators_eval_makima, 3},
     {"_interpolators_ipr_PCHIP", (DL_FUNC) &_interpolators_ipr_PCHIP, 2},

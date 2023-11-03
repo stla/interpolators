@@ -2,23 +2,48 @@
 % Please edit documentation in R/interpolators.R
 \name{iprCatmullRom}
 \alias{iprCatmullRom}
-\title{Title}
+\title{Catmull-Rom interpolator}
 \usage{
 iprCatmullRom(points, closed = FALSE, alpha = 0.5)
 }
 \arguments{
-\item{points}{matrix of points, one point per row}
+\item{points}{numeric matrix of 2D or 3D points, one point per row}
 
-\item{closed}{Boolean}
+\item{closed}{Boolean, whether the curve is closed}
 
-\item{alpha}{parameter between 0 and 1}
+\item{alpha}{parameter between 0 and 1; the default value 0.5 is recommended}
 }
 \value{
-x
+An interpolator, for usage in \code{\link{evalInterpolator}}.
 }
 \description{
-Title
+Catmull-Rom interpolator for 2-dimensional or 3-dimensional
+  points.
+}
+\details{
+See \href{https://www.boost.org/doc/libs/1_83_0/libs/math/doc/html/math_toolkit/catmull_rom.html}{Catmull-Rom splines}.
 }
 \examples{
-#
+library(interpolators)
+points <- rbind(
+  c(0, 2.5),
+  c(2, 4),
+  c(3, 2),
+  c(4, 1.5),
+  c(5, 6),
+  c(6, 5),
+  c(7, 3),
+  c(9, 1),
+  c(10, 2.5),
+  c(11, 7),
+  c(9, 5),
+  c(8, 6),
+  c(7, 5.5)
+)
+ipr <- iprCatmullRom(points)
+s <- seq(0, 1, length.out = 400)
+Curve <- evalInterpolator(ipr, s)
+head(Curve)
+plot(Curve, type = "l", lwd = 2)
+points(points, pch = 19)
 }
