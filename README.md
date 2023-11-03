@@ -5,3 +5,5 @@
 <!-- badges: end -->
 
 ![](https://raw.githubusercontent.com/stla/interpolators/main/inst/images/oscillating.png)
+
+![](https://raw.githubusercontent.com/stla/interpolators/main/inst/images/pentagram.png)
