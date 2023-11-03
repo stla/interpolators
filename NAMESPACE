@@ -2,6 +2,7 @@
 
 export(evalInterpolator)
 export(iprBarycentricRational)
+export(iprCatmullRom)
 export(iprMakima)
 export(iprPCHIP)
 importFrom(Rcpp,evalCpp)

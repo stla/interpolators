@@ -9,6 +9,14 @@ eval_barycentricRational <- function(ipr_xptr, x, derivative) {
     .Call(`_interpolators_eval_barycentricRational`, ipr_xptr, x, derivative)
 }
 
+ipr_catmullRom <- function(X, closed, alpha) {
+    .Call(`_interpolators_ipr_catmullRom`, X, closed, alpha)
+}
+
+eval_catmullRom <- function(ipr_xptr, s, derivative) {
+    .Call(`_interpolators_eval_catmullRom`, ipr_xptr, s, derivative)
+}
+
 ipr_Makima <- function(x, y) {
     .Call(`_interpolators_ipr_Makima`, x, y)
 }

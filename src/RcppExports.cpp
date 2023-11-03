@@ -37,6 +37,32 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// ipr_catmullRom
+Rcpp::XPtr<ipr_catmull_rom> ipr_catmullRom(Rcpp::NumericMatrix X, bool closed, double alpha);
+RcppExport SEXP _interpolators_ipr_catmullRom(SEXP XSEXP, SEXP closedSEXP, SEXP alphaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< bool >::type closed(closedSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(ipr_catmullRom(X, closed, alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
+// eval_catmullRom
+Rcpp::NumericMatrix eval_catmullRom(Rcpp::XPtr<ipr_catmull_rom> ipr_xptr, Rcpp::NumericVector s, int derivative);
+RcppExport SEXP _interpolators_eval_catmullRom(SEXP ipr_xptrSEXP, SEXP sSEXP, SEXP derivativeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<ipr_catmull_rom> >::type ipr_xptr(ipr_xptrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type s(sSEXP);
+    Rcpp::traits::input_parameter< int >::type derivative(derivativeSEXP);
+    rcpp_result_gen = Rcpp::wrap(eval_catmullRom(ipr_xptr, s, derivative));
+    return rcpp_result_gen;
+END_RCPP
+}
 // ipr_Makima
 Rcpp::XPtr<ipr_makima> ipr_Makima(Rcpp::NumericVector x, Rcpp::NumericVector y);
 RcppExport SEXP _interpolators_ipr_Makima(SEXP xSEXP, SEXP ySEXP) {
@@ -91,6 +117,8 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_interpolators_ipr_barycentricRational", (DL_FUNC) &_interpolators_ipr_barycentricRational, 3},
     {"_interpolators_eval_barycentricRational", (DL_FUNC) &_interpolators_eval_barycentricRational, 3},
+    {"_interpolators_ipr_catmullRom", (DL_FUNC) &_interpolators_ipr_catmullRom, 3},
+    {"_interpolators_eval_catmullRom", (DL_FUNC) &_interpolators_eval_catmullRom, 3},
     {"_interpolators_ipr_Makima", (DL_FUNC) &_interpolators_ipr_Makima, 2},
     {"_interpolators_eval_makima", (DL_FUNC) &_interpolators_eval_makima, 3},
     {"_interpolators_ipr_PCHIP", (DL_FUNC) &_interpolators_ipr_PCHIP, 2},

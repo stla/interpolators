@@ -25,6 +25,23 @@ iprBarycentricRational <- function(x, y, ao = 3) {
   ipr
 }
 
+#' Title
+#'
+#' @param points matrix of points, one point per row
+#' @param closed Boolean
+#' @param alpha parameter between 0 and 1
+#'
+#' @return x
+#' @export
+#'
+#' @examples
+#' #
+iprCatmullRom <- function(points, closed = FALSE, alpha = 0.5) {
+  ipr <- ipr_catmullRom(points, closed, alpha)
+  attr(ipr, "ipr") <- "CatmullRom"
+  ipr
+}
+
 #' @title Modified Akima interpolator
 #' @description Modified Akima interpolator.
 #'
@@ -98,6 +115,10 @@ evalInterpolator <- function(ipr, x, derivative = 0) {
   if(whichipr == "barycentricRational") {
     stopifnot(derivative %in% c(0, 1))
     eval_barycentricRational(ipr, as.double(x), as.integer(derivative))
+  } else if(whichipr == "CatmullRom") {
+    stopifnot(derivative %in% c(0, 1))
+    stopifnot(all(x >= 0), all(x <= 1))
+    eval_catmullRom(ipr, as.double(x), as.integer(derivative))
   } else if(whichipr == "makima") {
     stopifnot(derivative %in% c(0, 1))
     eval_makima(ipr, as.double(x), as.integer(derivative))
