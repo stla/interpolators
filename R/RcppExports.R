@@ -9,3 +9,11 @@ eval_barycentricRational <- function(ipr_xptr, x, derivative) {
     .Call(`_interpolators_eval_barycentricRational`, ipr_xptr, x, derivative)
 }
 
+ipr_PCHIP <- function(x, y) {
+    .Call(`_interpolators_ipr_PCHIP`, x, y)
+}
+
+eval_PCHIP <- function(ipr_xptr, x, derivative) {
+    .Call(`_interpolators_eval_PCHIP`, ipr_xptr, x, derivative)
+}
+

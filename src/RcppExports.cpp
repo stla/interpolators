@@ -37,10 +37,37 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// ipr_PCHIP
+Rcpp::XPtr<ipr_pchip> ipr_PCHIP(Rcpp::NumericVector x, Rcpp::NumericVector y);
+RcppExport SEXP _interpolators_ipr_PCHIP(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(ipr_PCHIP(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// eval_PCHIP
+Rcpp::NumericVector eval_PCHIP(Rcpp::XPtr<ipr_pchip> ipr_xptr, Rcpp::NumericVector x, int derivative);
+RcppExport SEXP _interpolators_eval_PCHIP(SEXP ipr_xptrSEXP, SEXP xSEXP, SEXP derivativeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::XPtr<ipr_pchip> >::type ipr_xptr(ipr_xptrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type derivative(derivativeSEXP);
+    rcpp_result_gen = Rcpp::wrap(eval_PCHIP(ipr_xptr, x, derivative));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_interpolators_ipr_barycentricRational", (DL_FUNC) &_interpolators_ipr_barycentricRational, 3},
     {"_interpolators_eval_barycentricRational", (DL_FUNC) &_interpolators_eval_barycentricRational, 3},
+    {"_interpolators_ipr_PCHIP", (DL_FUNC) &_interpolators_ipr_PCHIP, 2},
+    {"_interpolators_eval_PCHIP", (DL_FUNC) &_interpolators_eval_PCHIP, 3},
     {NULL, NULL, 0}
 };
 
