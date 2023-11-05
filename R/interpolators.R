@@ -163,9 +163,9 @@ iprPCHIP <- function(x, y) {
 #' @param x numeric vector giving the values to be interpolated; missing
 #'   values are not allowed; for Catmull-Rom splines, the values must be
 #'   between 0 and 1
-#' @param derivative order of differentiation, up to 1 for XXX
+#' @param derivative order of differentiation, up to 1
 #'
-#' @return Numeric vector of interpolated values or numeric matrix of
+#' @return Numeric vector of interpolated values, or numeric matrix of
 #'   interpolated points for the Catmull-Rom interpolator.
 #' @export
 evalInterpolator <- function(ipr, x, derivative = 0) {
