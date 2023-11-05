@@ -27,7 +27,7 @@ ipr <- iprPCHIP(x, y)
 curve(x - sin(x), from = 0, to = 4*pi, lwd = 2)
 curve(
   evalInterpolator(ipr, x),
-  add = TRUE, col = "blue", lwd = 2, lty = "dashed"
+  add = TRUE, col = "blue", lwd = 3, lty = "dashed"
 )
 points(x, y, pch = 19)
 }

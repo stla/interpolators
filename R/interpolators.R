@@ -86,7 +86,7 @@ iprCatmullRom <- function(points, closed = FALSE, alpha = 0.5) {
   }
   stopifnot(isBoolean(closed))
   stopifnot(isDouble(alpha))
-  stopifnot(alpha >=0, alpha <= 1)
+  stopifnot(alpha >= 0, alpha <= 1)
   d <- ncol(points)
   if(d == 2L) {
     ipr <- ipr_catmullRom2(points, closed, as.double(alpha))
@@ -117,7 +117,7 @@ iprCatmullRom <- function(points, closed = FALSE, alpha = 0.5) {
 #' curve(x - sin(x), from = 0, to = 4*pi, lwd = 2)
 #' curve(
 #'   evalInterpolator(ipr, x),
-#'   add = TRUE, col = "blue", lwd = 2, lty = "dashed"
+#'   add = TRUE, col = "blue", lwd = 3, lty = "dashed"
 #' )
 #' points(x, y, pch = 19)
 iprMakima <- function(x, y) {
@@ -146,7 +146,7 @@ iprMakima <- function(x, y) {
 #' curve(x - sin(x), from = 0, to = 4*pi, lwd = 2)
 #' curve(
 #'   evalInterpolator(ipr, x),
-#'   add = TRUE, col = "blue", lwd = 2, lty = "dashed"
+#'   add = TRUE, col = "blue", lwd = 3, lty = "dashed"
 #' )
 #' points(x, y, pch = 19)
 iprPCHIP <- function(x, y) {
