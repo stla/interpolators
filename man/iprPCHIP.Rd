@@ -17,7 +17,7 @@ An interpolator, for usage in \code{\link{evalInterpolator}}.
 PCHIP interpolator. It is monotonic.
 }
 \details{
-See \href{https://www.boost.org/doc/libs/1_83_0/libs/math/doc/html/math_toolkit/pchip.html}{PCHIP Interpolation}.
+See \href{https://www.boost.org/doc/libs/1_83_0/libs/math/doc/html/math_toolkit/pchip.html}{PCHIP interpolation}.
 }
 \examples{
 library(interpolators)

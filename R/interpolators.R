@@ -136,7 +136,7 @@ iprMakima <- function(x, y) {
 #' @return An interpolator, for usage in \code{\link{evalInterpolator}}.
 #' @export
 #'
-#' @details See \href{https://www.boost.org/doc/libs/1_83_0/libs/math/doc/html/math_toolkit/pchip.html}{PCHIP Interpolation}.
+#' @details See \href{https://www.boost.org/doc/libs/1_83_0/libs/math/doc/html/math_toolkit/pchip.html}{PCHIP interpolation}.
 #'
 #' @examples
 #' library(interpolators)
@@ -163,7 +163,7 @@ iprPCHIP <- function(x, y) {
 #' @param x numeric vector giving the values to be interpolated; missing
 #'   values are not allowed; for Catmull-Rom splines, the values must be
 #'   between 0 and 1
-#' @param derivative order of differentiation, up to 1
+#' @param derivative order of differentiation, 0 or 1
 #'
 #' @return Numeric vector of interpolated values, or numeric matrix of
 #'   interpolated points for the Catmull-Rom interpolator.

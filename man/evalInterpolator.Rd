@@ -13,7 +13,7 @@ evalInterpolator(ipr, x, derivative = 0)
 values are not allowed; for Catmull-Rom splines, the values must be
 between 0 and 1}
 
-\item{derivative}{order of differentiation, up to 1}
+\item{derivative}{order of differentiation, 0 or 1}
 }
 \value{
 Numeric vector of interpolated values, or numeric matrix of
