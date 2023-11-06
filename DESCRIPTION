@@ -4,8 +4,9 @@ Version: 1.0.0
 Authors@R: 
     person("Stéphane", "Laurent", , "laurent_step@outlook.fr", role = c("aut", "cre"))
 Description: Some interpolation methods taken from 'Boost': barycentric
-    rational interpolation, modified Akima interpolation, PCHIP
-    interpolation, and Catmull-Rom splines.
+    rational interpolation, modified Akima interpolation, PCHIP (piecewise
+    cubic Hermite interpolating polynomial) interpolation, and Catmull-Rom
+    splines.
 License: GPL-3
 URL: https://github.com/stla/interpolators
 BugReports: https://github.com/stla/interpolators/issues
