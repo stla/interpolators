@@ -1,4 +1,5 @@
 #include <Rcpp.h>
+#include <array>
 #include <boost/math/interpolators/barycentric_rational.hpp>
 #include <boost/math/interpolators/catmull_rom.hpp>
 #include <boost/math/interpolators/makima.hpp>

@@ -1,5 +1,1 @@
-## R CMD check results
-
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
+The compilation fails on Mac. I fixed this issue by adding `#include <array>`.
